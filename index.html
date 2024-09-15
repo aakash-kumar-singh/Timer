@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clock</title>
+  <link rel="stylesheet" href="Timer.css">
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <h1>Digital Clock</h1>
+        <div id="timer" class="dispTime">Click to start!</div>
+        <div id="date" class="dispDate"></div>
+        <div class="buttons">
+            <button onclick="start()">Start</button>
+            <button onclick="stop()">Stop</button>
+        </div>
+    </div>
+</div>
+  <script>
+   let interval;
+
+function start() {
+  if (interval) return; 
+
+  interval = setInterval(() => {
+    let meridiem='AM';
+    let date = new Date();
+    let sec = date.getSeconds();
+    let mins = date.getMinutes();
+    let hrs = date.getHours();
+    let days = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    if (hrs == 0) {
+      hrs = 12;
+    }
+    if (hrs > 12) {
+      hrs = hrs - 12;
+      meridiem = "PM";
+    }
+    if(sec<10){
+      sec="0" + sec;
+    }
+    if(mins<10){
+      mins="0" + mins;
+    }
+    if(hrs<10){
+      hrs="0" + hrs;
+    }
+    if(days<10){
+      days="0" + days;
+    }
+    if(month<10){
+      month="0" + (month+1);
+    }
+    else{
+      month=month+1;
+    }
+    let time = hrs + ":" + mins + ":" + sec + " " + meridiem;
+    document.getElementById("timer").innerText = time;
+    document.getElementById("date").innerText = days + "/" + month  + "/" + year;
+  }, 1000);
+}
+
+function stop() {
+  clearInterval(interval);
+  interval = null;
+}
+    </script>
+  
+</body>
+</html>
