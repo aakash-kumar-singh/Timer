@@ -22,8 +22,6 @@
    let interval;
 
 function start() {
-  if (interval) return; 
-
   interval = setInterval(() => {
     let meridiem='AM';
     let date = new Date();
@@ -52,12 +50,7 @@ function start() {
     if(days<10){
       days="0" + days;
     }
-    if(month<10){
-      month="0" + (month+1);
-    }
-    else{
-      month=month+1;
-    }
+    month = (month + 1).toString().padStart(2, '0');
     let time = hrs + ":" + mins + ":" + sec + " " + meridiem;
     document.getElementById("timer").innerText = time;
     document.getElementById("date").innerText = days + "/" + month  + "/" + year;
